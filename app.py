@@ -34,7 +34,7 @@ def test():
 
 @socketio.on("update")
 def update(data):
-    print('Current Value', data['value'])
+    print('Current Value', data)
 
 
 if __name__ == '__main__':
