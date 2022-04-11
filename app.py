@@ -16,7 +16,7 @@ def test():
         language = request.args.get('data')
         framework = request.args.get('framework')
         
-        socketio.emit('update'
+        socketio.emit('update',
         '''
         <h1>The language value is: {}</h1>
         <h1>The framework value is: {}</h1>
