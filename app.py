@@ -10,8 +10,8 @@ def hello():
 @app.route('/test', methods=['POST', 'GET'])
 def test():
     if request.method == 'POST' or request.method == 'GET':
-        language = request.form.get('language')
-        framework = request.form.get('framework')
+        language = request.args.get('language')
+        framework = request.args.get('framework')
         return '''
                   <h1>The language value is: {}</h1>
                   <h1>The framework value is: {}</h1>'''.format(language, framework)
