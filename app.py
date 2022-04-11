@@ -7,5 +7,10 @@ app = Flask(__name__)
 def hello():
     return "Hello, World!"
 
+@app.route('/test', methods=['GET'])
+def returnAll():
+    return "request sent!!!"
+
+
 if __name__ == '__main__':
-    app.run(host= '128.173.76.190', port=9000, debug=False)
+    app.run(host= '128.173.76.190', port=9000, debug=True)
