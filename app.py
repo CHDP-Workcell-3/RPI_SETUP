@@ -24,6 +24,8 @@ def test():
         
         print("sdfhjksdfjkhdfshjksdf")
         
+        socketio.emit('update', data="passing data along", broadcast=True)
+        
         return '''
                   <h1>The language value is: {}</h1>
                   <h1>The framework value is: {}</h1>'''.format(language, framework)
@@ -34,10 +36,10 @@ def test():
                   <h1>The language value is: {}</h1>
                   <h1>The framework value is: {}</h1>'''.format(language, framework)
 
-@socketio.on("update")
+@socketio.on('update')
 def update(data):
     print('Current Value', data)
-    return "Stuff happened"
+    return("Stuff happened")
 
 
 if __name__ == '__main__':
