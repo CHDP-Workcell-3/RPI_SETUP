@@ -22,6 +22,8 @@ def test():
         <h1>The framework value is: {}</h1>
         '''.format(language, framework), broadcast=True)
         
+        print("sdfhjksdfjkhdfshjksdf")
+        
         return '''
                   <h1>The language value is: {}</h1>
                   <h1>The framework value is: {}</h1>'''.format(language, framework)
