@@ -25,7 +25,7 @@ def test():
         return '''
                   <h1>The language value is: {}</h1>
                   <h1>The framework value is: {}</h1>'''.format(language, framework)
-    if request.method == 'POST'
+    if request.method == 'POST':
         language = request.form.get('data')
         framework = request.form.get('framework')
         return '''
