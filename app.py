@@ -7,9 +7,9 @@ app = Flask(__name__)
 def hello():
     return "Hello, World!"
 
-@app.route('/test', methods=['POST'])
+@app.route('/test', methods=['POST', 'GET'])
 def test():
-    if request.method == 'POST':
+    if request.method == 'POST' or request.method == 'GET':
         language = request.form.get('language')
         framework = request.form.get('framework')
         return '''
