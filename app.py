@@ -2,45 +2,44 @@
 from flask import Flask, request, render_template
 from flask_socketio import SocketIO, send, emit
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="./", template_folder="./")
 socketio = SocketIO(app,cors_allowed_origins="*")
 
 @app.route("/")
 def index():
-    return "base site!"
+    return render_template('index.html')
+    # return "base site!"
     # return render_template("index.html")
 
-@app.route('/test', methods=['POST', 'GET'])
+@app.route('/test', methods=['GET'])
 def test():
+    
+    data_list = ['temp', 'humidity', 'imu', 'gps']
+    data_res = []
+    
     if request.method == 'GET':
-        language = request.args.get('data')
-        framework = request.args.get('framework')
         
-        socketio.emit('update',
-        '''
-        <h1>The language value is: {}</h1>
-        <h1>The framework value is: {}</h1>
-        '''.format(language, framework), broadcast=True)
+        for data in data_list:
+            data_res.append(request.args.get(data))
         
-        print("sdfhjksdfjkhdfshjksdf")
+        output = ''
         
-        socketio.emit('update', data="passing data along", broadcast=True)
+        for data_name, data in zip(data_list, data_res):
+            if data != None:
+                output += '<h1>The {:s} value is: {}</h1>\n'.format(data_name, data)
         
-        return '''
-                  <h1>The language value is: {}</h1>
-                  <h1>The framework value is: {}</h1>'''.format(language, framework)
-    if request.method == 'POST':
-        language = request.form.get('data')
-        framework = request.form.get('framework')
-        return '''
-                  <h1>The language value is: {}</h1>
-                  <h1>The framework value is: {}</h1>'''.format(language, framework)
+        socketio.emit('update', output, broadcast=True)
+        
+        #return output
+        return "response sent!"
 
-@socketio.on('update')
-def update(data):
-    print('Current Value', data)
-    return("Stuff happened")
+@socketio.on('hello')
+def handle_hello(data):
+    print(data)
+    socketio.emit('write_back', broadcast=True)
+    #return render_template('index2.html')
 
 
 if __name__ == '__main__':
-    socketio.run(app, host= '128.173.76.190', port=9000, debug=True)
+    # socketio.run(app, host= '128.173.76.190', port=9000, debug=True)
+    socketio.run(app, host= '127.0.0.1', port=9000, debug=True)
