@@ -2,7 +2,8 @@
     <head>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
         <script>
-            const socket = io.connect('http://localhost:9000/');
+            // const socket = io.connect('http://localhost:9000/');
+            const socket = io.connect('http://128.173.76.190:9000/');
 
             // Show a message when we're connected to the server
             socket.on('connect', () => console.log('We\'re connected!'));

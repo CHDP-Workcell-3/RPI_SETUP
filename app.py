@@ -41,5 +41,5 @@ def handle_hello(data):
 
 
 if __name__ == '__main__':
-    # socketio.run(app, host= '128.173.76.190', port=9000, debug=True)
-    socketio.run(app, host= '127.0.0.1', port=9000, debug=True)
+    socketio.run(app, host= '128.173.76.190', port=9000, debug=True)
+    # socketio.run(app, host= '127.0.0.1', port=9000, debug=True)
