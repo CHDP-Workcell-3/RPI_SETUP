@@ -1,8 +1,8 @@
 #include <SPI.h>
 #include <WiFiNINA.h>
-int    HTTP_PORT   = 80;
+int    HTTP_PORT   = 9000;
 String HTTP_METHOD = "GET";
-char   HOST_NAME[] = "172.31.90.230:9000"; // change to your PC's IP address
+char   HOST_NAME[] = "172.31.90.230"; // change to your PC's IP address
 String PATH_NAME   = "";
 String queryString = "test?temp=10&humidity=20&imu=30gps=abc";
 
@@ -10,7 +10,7 @@ String queryString = "test?temp=10&humidity=20&imu=30gps=abc";
 const char SSID[]     =  "Johann's iPhone";    // Network SSID (name)
 const char PASS[]     =  "lol12345";    // Network password (use for WPA, or use as key for WEP)
 //HOST ip address
-const char server[]   =  "172.31.90.230:9000";      // Server IP Address
+const char server[]   =  "172.31.90.230";      // Server IP Address
 
 int status = WL_IDLE_STATUS;
 
@@ -25,6 +25,7 @@ void setup() {
     // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
     status = WiFi.begin(SSID, PASS);
     // wait 10 seconds for connection:
+    Serial.println("Connecting...");
     delay(10000);
   }
   httpRequest();
@@ -40,7 +41,7 @@ void httpRequest() {
   // This will free the socket on the Nina modul
   client.stop();
   // if there's a successful connection:
-  if (client.connect(server, 80)) {
+  if (client.connect(server, HTTP_PORT)) {
     Serial.println("Connected to server");
     // make a HTTP request:
     // send HTTP header
