@@ -8,8 +8,6 @@ socketio = SocketIO(app,cors_allowed_origins="*")
 @app.route("/")
 def index():
     return render_template('index.html')
-    # return "base site!"
-    # return render_template("index.html")
 
 @app.route('/test', methods=['GET'])
 def test():
@@ -41,5 +39,8 @@ def handle_hello(data):
 
 
 if __name__ == '__main__':
-    socketio.run(app, host= '128.173.76.190', port=9000, debug=True)
+    # socketio.run(app, host= '128.173.76.190', port=9000, debug=True)
     # socketio.run(app, host= '127.0.0.1', port=9000, debug=True)
+    # socketio.run(app, host= '172.20.10.4', port=9000, debug=True)
+    socketio.run(app, host= '10.0.1.4', port=9000, debug=True)
+    
