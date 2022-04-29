@@ -1,0 +1,103 @@
+<html>
+    <head>
+        <script type='text/javascript' src="{{ url_for('static', filename='js/socket.io.js') }}"></script>
+        <script type='text/javascript' src="{{ url_for('static', filename='js/chart.js') }}"></script>
+        
+        <link href="{{ url_for('static', filename='css/google_fonts.css') }}" rel="stylesheet" /><link href="{{ url_for('static', filename='css/google_fonts2.css') }}" rel="stylesheet" /><link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" /><title>Document</title>
+    </head>
+    
+    <body>
+        <div class="v328_57"><div class="v328_109"></div><div class="v328_116"></div><div class="v328_110"></div><div class="v328_117"></div><div class="v328_58"></div><div class="v328_59"></div><div class="v328_60"></div><span class="v328_61">BEYOND CONSTRUCTION</span><span class="v328_62">PROTECT AND UPGRADE YOUR CONSTRUCTION FLEET</span><div class="name"></div><div class="name"></div><div class="name"></div><div class="v328_66"></div><div class="v328_89"></div><div class="v328_91"></div><div class="v328_93"></div><div class="v328_95"></div><div class="v328_67"></div><div class="v328_68"></div><div class="v328_69"></div><div class="v328_70"></div><div class="v328_71"></div><div class="v328_72"></div><span class="v328_73">Excavator 15</span><span class="v328_74">Excavator 15</span><span class="v328_97">Connected Machines</span><span class="v328_99">Your Analysis</span><span class="v328_75">Excavator 15</span><span class="v328_76">Excavator 15</span><span class="v328_77">Excavator 15</span>
+        
+        <div class="v328_78"><canvas id="chart0"></canvas></div>
+        <div class="v328_92"><canvas id="chart1"></canvas></div>
+        <div class="v328_94"><canvas id="chart2"></canvas></div>
+        <div class="v328_96"><canvas id="chart3"></canvas></div>
+        
+        <div class="name"></div><div class="v328_83"></div><div class="v328_84"></div><div class="v328_85"></div><div class="v328_86"></div><div class="name"></div><div class="name"></div><div class="v328_107"></div><div class="v328_118"></div><span class="v328_111">86%</span><span class="v328_119">97%</span><span class="v328_112">Health</span><span class="v328_120">Utilization</span></div>
+    </body>
+    
+    <script>
+        var labels = [];
+        var data = {
+            labels: labels,
+            datasets: [{
+                label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [],
+            }]
+        };
+        var config = {
+        type: 'line',
+        data: data,
+        options: {}
+        };
+    </script>
+
+    <script>
+        var myChart0 = new Chart(
+        document.getElementById('chart0'),
+        config
+        );
+        var myChart1 = new Chart(
+        document.getElementById('chart1'),
+        config
+        );
+        var myChart2 = new Chart(
+        document.getElementById('chart2'),
+        config
+        );
+        var myChart3 = new Chart(
+        document.getElementById('chart3'),
+        config
+        );
+    </script>
+    
+    <script>
+        // const socket = io.connect('http://10.0.1.4:9000/');
+        const socket = io.connect('http://localhost:9000/');
+
+        // Show a message when we're connected to the server
+        socket.on('connect', () => console.log('We\'re connected!'));
+
+        function makeElem(data) {
+            // console.log(data);
+            updateGraphs(JSON.parse(data));
+        }
+        
+        function updateGraphs(data) {
+            let data_names = ["temp", "humidity", "imu", "gps"];
+            for(let i = 0; i < data_names.length; i++) {
+                makeConfig(data_names[i], data[data_names[i]]);
+            }
+        }
+        
+        function makeConfig(data_name, new_data) {
+            
+            labels = Array.from({length: new_data.length}, (_, i) => (i + 1).toString());
+            
+            data.labels = labels;
+            data.datasets[0].data = new_data;
+            data.datasets[0].label = data_name;
+            
+            config.data = data;
+            
+            if (data_name == "gps") {
+                myChart0.update(config);
+            }
+            if (data_name == "imu") {
+                myChart1.update(config);
+            }
+            if (data_name == "humidity") {
+                myChart2.update(config);
+            }
+            if (data_name == "temp") {
+                myChart3.update(config);
+            }
+        }
+        
+        socket.on('update', (data) => makeElem(data));
+    </script>
+
+</html>

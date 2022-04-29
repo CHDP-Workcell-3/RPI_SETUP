@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<link href="./css/google_fonts.css" rel="stylesheet" /><link href="./css/google_fonts2.css" rel="stylesheet" /><link href="./css/main.css" rel="stylesheet" /><title>Document</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="v328_57"><div class="v328_109"></div><div class="v328_116"></div><div class="v328_110"></div><div class="v328_117"></div><div class="v328_58"></div><div class="v328_59"></div><div class="v328_60"></div><span class="v328_61">BEYOND CONSTRUCTION</span><span class="v328_62">PROTECT AND UPGRADE YOUR CONSTRUCTION FLEET</span><div class="name"></div><div class="name"></div><div class="name"></div><div class="v328_66"></div><div class="v328_89"></div><div class="v328_91"></div><div class="v328_93"></div><div class="v328_95"></div><div class="v328_67"></div><div class="v328_68"></div><div class="v328_69"></div><div class="v328_70"></div><div class="v328_71"></div><div class="v328_72"></div><span class="v328_73">Excavator 15</span><span class="v328_74">Excavator 15</span><span class="v328_97">Connected Machines</span><span class="v328_99">Your Analysis</span><span class="v328_75">Excavator 15</span><span class="v328_76">Excavator 15</span><span class="v328_77">Excavator 15</span>
+
+<div class="v328_78"><canvas id="chart0"></canvas></div>
+<div class="v328_92"><canvas id="chart1"></canvas></div>
+<div class="v328_94"><canvas id="chart2"></canvas></div>
+<div class="v328_96"><canvas id="chart3"></canvas></div>
+
+<div class="name"></div><div class="v328_83"></div><div class="v328_84"></div><div class="v328_85"></div><div class="v328_86"></div><div class="name"></div><div class="name"></div><div class="v328_107"></div><div class="v328_118"></div><span class="v328_111">86%</span><span class="v328_119">97%</span><span class="v328_112">Health</span><span class="v328_120">Utilization</span></div>
+
+</body>
+
+<script>
+const labels = [
+'January',
+'February',
+'March',
+'April',
+'May',
+'June',
+];
+const data = {
+labels: labels,
+datasets: [{
+label: 'My First dataset',
+backgroundColor: 'rgb(255, 99, 132)',
+borderColor: 'rgb(255, 99, 132)',
+data: [0, 10, 5, 2, 20, 30, 45],
+}]
+};
+const config = {
+type: 'line',
+data: data,
+options: {}
+};
+</script>
+
+<script>
+const myChart0 = new Chart(
+document.getElementById('chart0'),
+config
+);
+const myChart1 = new Chart(
+document.getElementById('chart1'),
+config
+);
+const myChart2 = new Chart(
+document.getElementById('chart2'),
+config
+);
+const myChart3 = new Chart(
+document.getElementById('chart3'),
+config
+);
+</script>
+
+</html>
